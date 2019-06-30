@@ -3,9 +3,9 @@ jobs:
  build:
    docker:
      # specify the version you desire here
-     - image: circleci/node:v8.11.1
+     - image: circleci/node:11.15
 
-   working_directory: ~/su-node200-loopback-workshop
+   working_directory: ~/jgnode200-loopback-workshop
 
    steps:
      - checkout
@@ -25,15 +25,15 @@ jobs:
          key: v1-dependencies-{{ checksum “package.json” }}
 
      # run tests!
-     - run: yarn test
-      # command: yarn test
-      #    environment:
-      #      NODE_ENV: production
-      #      ENV: production
+     - run:
+         command: yarn test
+         environment:
+           NODE_ENV: production
+           ENV: production
 
  deploy:
    docker:
-     - image: circleci/node:v8.11.1
+     - image: circleci/node:11.15
    steps:
      - checkout
      - run:
@@ -51,3 +51,4 @@ workflows:
          filters:
            branches:
              only: master
+             
